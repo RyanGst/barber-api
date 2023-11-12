@@ -1,6 +1,6 @@
 import { describe, expect, it } from "bun:test";
 import superTest from "supertest";
-import { app } from "~/server.ts";
+import { app } from "~/app";
 
 describe("GET /", () => {
   it("should return 200 OK", async() => {
