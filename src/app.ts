@@ -1,10 +1,9 @@
-import express from "express";
 import { Server } from "~/http/server"
 import { ServerLogger } from "./http/logger";
+import { routes } from "./http/router/routes";
 
 
-const router = express.Router();
 const logger = new ServerLogger();
-const server = new Server(router, logger);
+const server = new Server(routes(), logger);
 
 server.start();

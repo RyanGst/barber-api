@@ -1,10 +1,10 @@
 import { describe, expect, it } from "bun:test";
-import superTest from "supertest";
-import { app } from "~/app";
+import request from "supertest";
+import { app } from "./create-app";
 
 describe("GET /", () => {
-  it("should return 200 OK", async() => {
-    const response = await superTest(app).get("/");
-    expect(response.status).toBe(200);
+  it("responds with 200", async () => {
+    const response = await request(app).get("/");
+    expect(response.status).toEqual(200);
   });
 });
