@@ -1,6 +1,6 @@
 import { describe, expect, it } from "bun:test";
 import request from "supertest";
-import { app } from "./create-app";
+import { app } from "../utils/create-app.ts";
 
 describe("GET /", () => {
   it("responds with 200", async () => {

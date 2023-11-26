@@ -1,5 +1,5 @@
 import { type Handler } from "express";
-import { type ILogger } from "~/domain/logger/ILogger";
+import { type ILogger } from "~/domain/logger/ILogger.ts";
 
 export class MockServerLogger implements ILogger {
   public debugLogs: string[] = [];
