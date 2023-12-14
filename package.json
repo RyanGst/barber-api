@@ -7,12 +7,10 @@
     "test": "bun test"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.4.1",
     "@types/express": "^4.17.21",
     "@types/morgan": "^1.9.9",
     "bun-types": "latest",
-    "eslint": "^8.53.0",
-    "eslint-plugin-import": "^2.29.0",
-    "prettier": "^3.0.3",
     "supertest": "^6.3.3"
   },
   "peerDependencies": {
@@ -21,7 +19,6 @@
   "dependencies": {
     "@prisma/client": "^5.5.2",
     "@types/supertest": "^2.0.16",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
     "date-fns": "^2.30.0",
     "express": "^4.18.2",
     "morgan": "^1.10.0",

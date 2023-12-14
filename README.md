@@ -1,4 +1,4 @@
-# schema-multitenancy
+# noname api
 
 To install dependencies:
 
