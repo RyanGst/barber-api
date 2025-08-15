@@ -6,5 +6,7 @@ declare module "bun" {
     APP_DATABASE_URL: string;
     APP_LOG_LEVEL: string;
     LOGS_PATH: string;
+    MONGO_URI: string;
+    REDIS_URL: string;
   }
 }
