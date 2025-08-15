@@ -16,6 +16,7 @@ export const routes = () => {
   });
 
   router.get("/health", healthController);
-  router.use("/api/barbershops", barbershopsRouter);
+
+  barbershopsRouter(router);
   return router;
 };

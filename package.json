@@ -15,6 +15,7 @@
     "@biomejs/biome": "1.4.1",
     "@types/express": "^4.17.21",
     "@types/morgan": "^1.9.9",
+    "mongodb-memory-server": "^10.1.4",
     "bun-types": "latest",
     "supertest": "^6.3.3"
   },

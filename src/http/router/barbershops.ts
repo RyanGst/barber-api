@@ -1,8 +1,11 @@
 import { Router } from "express";
-import { createBarbershop, updateBarbershop } from "~/http/controllers/barbershops.controller";
+import { createBarbershop, getBarbershops, updateBarbershop } from "~/http/controllers/barbershops.controller";
 import { requireAuth } from "~/http/middleware/require-auth";
 
-export const barbershopsRouter = Router();
+export const barbershopsRouter = (app: Router) => {
 
-barbershopsRouter.post("/", requireAuth, createBarbershop);
-barbershopsRouter.patch("/:id", requireAuth, updateBarbershop);
+  app.get("/api/barbershops", getBarbershops);
+  app.post("/api/barbershops", requireAuth, createBarbershop);
+  app.patch("/api/barbershops/:id", requireAuth, updateBarbershop);
+
+}

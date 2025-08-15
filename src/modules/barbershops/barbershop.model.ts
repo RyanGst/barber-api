@@ -75,8 +75,9 @@ const barbershopSchema = new Schema<Barbershop>(
         required: true,
         min: 0,
         validate: {
-          validator: function (this: CostRange, v: number) {
-            return typeof v === "number" && v >= (this as any).min;
+          validator: function (this: any, v: number) {
+            const min = this.get?.("costRange.min") ?? this.costRange?.min;
+            return typeof v === "number" && typeof min === "number" && v >= min;
           },
           message: "costRange.max must be >= costRange.min",
         },

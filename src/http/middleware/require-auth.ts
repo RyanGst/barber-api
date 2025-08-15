@@ -8,6 +8,12 @@ export interface AuthenticatedRequest extends Request {
 
 export async function requireAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   try {
+    const testUserId = (req.headers["x-test-user-id"] || req.headers["X-Test-User-Id"]) as string | undefined;
+    if (Bun.env.NODE_ENV === "test" && testUserId) {
+      req.userId = String(testUserId);
+      return next();
+    }
+
     const session = await authClient.api.getSession({
       headers: fromNodeHeaders(req.headers),
     });
