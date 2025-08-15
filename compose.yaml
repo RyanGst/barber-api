@@ -1,8 +1,6 @@
 version: "3.8"
 
 x-common-app-settings: &common-app-settings
-  build:
-    context: .
   depends_on:
     - redis
     - mongodb
@@ -10,12 +8,6 @@ x-common-app-settings: &common-app-settings
 x-base-environment: &base-environment
   REDIS_URL: ${REDIS_URL}
   MONGO_URI: ${MONGO_URI}
-  MINIO_ROOT_USER: ${MINIO_ROOT_USER}
-  MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
-  S3_ACCESS_KEY: ${S3_ACCESS_KEY}
-  S3_SECRET_KEY: ${S3_SECRET_KEY}
-  S3_ENDPOINT: ${S3_ENDPOINT}
-  S3_BUCKET: ${S3_BUCKET}
 
 services:
   redis:
@@ -34,18 +26,34 @@ services:
     volumes:
       - mongodb_data:/data/db
     environment:
-      - MONGO_INITDB_DATABASE=etternizer
+      - MONGO_INITDB_DATABASE=barber
     restart: unless-stopped
 
   api:
     <<: *common-app-settings
+    container_name: barber-api
     build:
       context: .
+      target: development
       dockerfile: Dockerfile
+    command: sh -c "bun install && bun run dev"
+    env_file:
+      - .env
     environment:
       <<: *base-environment
-      API_PORT: ${API_PORT}
+      PORT: ${PORT:-3000}
+      APP_NAME: ${APP_NAME:-barber-api}
+      LOGS_PATH: ${LOGS_PATH:-./logs}
+    volumes:
+      - .:/app
+      - api_node_modules:/app/node_modules
+      - bun_cache:/root/.bun
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    restart: unless-stopped
 
 volumes:
   mongodb_data:
   redis_data:
+  api_node_modules:
+  bun_cache:

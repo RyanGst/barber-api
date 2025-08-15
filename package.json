@@ -4,6 +4,10 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch ./src/app.ts",
+    "dev:docker:up": "docker compose up --build",
+    "dev:docker:down": "docker compose down -v",
+    "dev:docker:logs": "docker compose logs -f api",
+    "dev:docker:restart": "docker compose restart api",
     "test": "bun test",
     "lint": "biome check"
   },
