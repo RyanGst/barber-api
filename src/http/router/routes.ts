@@ -1,6 +1,8 @@
 import { toNodeHandler } from "better-auth/node";
 import express, { Router } from "express";
 import { healthController } from "~/http/controllers/health/health-controller.ts";
+import { barbershopsRouter } from "~/http/router/barbershops";
+import { connectToDatabase } from "~/database/mongoose";
 import { authClient } from "~/modules/auth/auth";
 
 export const routes = () => {
@@ -14,5 +16,6 @@ export const routes = () => {
   });
 
   router.get("/health", healthController);
+  router.use("/api/barbershops", barbershopsRouter);
   return router;
 };

@@ -2,6 +2,7 @@ import express from "express";
 import { type AddressInfo } from "ws";
 import type * as http from 'http';
 import { type ILogger } from "~/domain/logger/ILogger";
+import { connectToDatabase } from "~/database/mongoose";
 
 export class Server {
   private readonly express: express.Application;
@@ -17,6 +18,11 @@ export class Server {
   }
 
   public start = async (): Promise<void> => {
+    void connectToDatabase().catch((err) => {
+      console.error("Failed to connect to MongoDB", err);
+    });
+
+
     return await new Promise<void>((resolve) => {
       this.http = this.express.listen(Bun.env.PORT, () => {
         const { port } = this.http.address() as AddressInfo;
